@@ -2,8 +2,6 @@
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>계산기</title>
 
 <style>
@@ -15,89 +13,97 @@
 }
 
 body{
-
-    background:#DFF5D8;
-    font-family:"맑은 고딕",sans-serif;
-
+    background:#dff7d8;
+    font-family:"맑은 고딕";
     display:flex;
     justify-content:center;
     align-items:center;
-
-    min-height:100vh;
-
+    height:100vh;
 }
-
-/* 계산기 */
 
 .calculator{
 
-    width:420px;
+    width:470px;
 
     background:white;
 
-    border-radius:25px;
+    border-radius:20px;
 
-    padding:25px;
+    border:6px solid #2e7d32;
 
-    box-shadow:0 0 30px rgba(0,0,0,.25);
+    padding:20px;
 
-    border:6px solid #2E7D32;
+    box-shadow:0px 0px 25px gray;
 
 }
-
-/* 제목 */
 
 .title{
 
     text-align:center;
 
-    font-size:42px;
+    font-size:40px;
 
-    color:#1B5E20;
+    color:#1b5e20;
 
     font-weight:bold;
 
-    margin-bottom:5px;
-
 }
-
-/* 수학 장식 */
 
 .math{
 
     text-align:center;
 
-    color:#2E7D32;
+    margin-top:8px;
 
-    font-size:22px;
+    margin-bottom:15px;
 
-    margin-bottom:20px;
+    color:#388e3c;
 
     letter-spacing:8px;
 
+    font-size:22px;
+
 }
 
-/* 화면 */
+/* 계산기록 */
 
-#display{
+.history{
+
+    height:150px;
+
+    overflow-y:auto;
+
+    border:2px solid #81c784;
+
+    border-radius:10px;
+
+    background:#f8fff6;
+
+    padding:10px;
+
+    margin-bottom:15px;
+
+    font-size:18px;
+
+}
+
+.display{
 
     width:100%;
 
-    height:70px;
+    height:65px;
 
-    font-size:34px;
+    font-size:32px;
 
     text-align:right;
 
     padding:10px;
 
+    border:3px solid #2e7d32;
+
     border-radius:10px;
 
-    border:3px solid #2E7D32;
-
     margin-bottom:20px;
-
-    background:#F8FFF8;
 
 }
 
@@ -109,73 +115,59 @@ body{
 
     grid-template-columns:repeat(4,1fr);
 
-    gap:12px;
+    gap:10px;
 
 }
 
 button{
 
-    height:65px;
+    height:60px;
 
-    font-size:24px;
+    font-size:22px;
 
     border:none;
 
-    border-radius:12px;
+    border-radius:10px;
 
     cursor:pointer;
-
-    font-weight:bold;
 
     transition:.2s;
 
 }
 
-/* 숫자 */
+.num{
 
-.number{
-
-    background:#A5D6A7;
+    background:#c8e6c9;
 
 }
 
-/* 연산 */
+.op{
 
-.operator{
-
-    background:#4CAF50;
+    background:#43a047;
 
     color:white;
 
 }
-
-/* 결과 */
 
 .equal{
 
-    background:#1565C0;
+    background:#1565c0;
 
     color:white;
 
 }
-
-/* 삭제 */
 
 .clear{
 
-    background:#E53935;
+    background:#e53935;
 
     color:white;
 
 }
-
-/* 마우스 */
 
 button:hover{
 
     transform:scale(1.05);
-
-    box-shadow:0 0 10px rgba(0,0,0,.3);
 
 }
 
@@ -183,13 +175,13 @@ button:hover{
 
 .footer{
 
+    margin-top:20px;
+
     text-align:center;
 
-    margin-top:25px;
+    color:#1b5e20;
 
-    color:#1B5E20;
-
-    font-size:24px;
+    font-size:26px;
 
     font-weight:bold;
 
@@ -211,55 +203,54 @@ button:hover{
 
 <div class="math">
 
-π &nbsp; Σ &nbsp; √ &nbsp; ∫ &nbsp; Δ
+π Σ √ ∫ Δ
 
 </div>
 
-<input type="text" id="display" readonly>
+<div class="history" id="history">
+
+<b>계산과정</b><br>
+
+</div>
+
+<input class="display" id="display" readonly>
 
 <div class="buttons">
 
-<button class="clear" onclick="clearDisplay()">C</button>
+<button class="clear" onclick="clearAll()">C</button>
 
-<button class="clear" onclick="backspace()">←</button>
+<button class="clear" onclick="back()">←</button>
 
-<button class="operator" onclick="append('%')">%</button>
+<button class="op" onclick="add('%')">%</button>
 
-<button class="operator" onclick="append('/')">÷</button>
+<button class="op" onclick="add('/')">÷</button>
 
-<button class="number" onclick="append('7')">7</button>
+<button class="num" onclick="add('7')">7</button>
+<button class="num" onclick="add('8')">8</button>
+<button class="num" onclick="add('9')">9</button>
+<button class="op" onclick="add('*')">×</button>
 
-<button class="number" onclick="append('8')">8</button>
+<button class="num" onclick="add('4')">4</button>
+<button class="num" onclick="add('5')">5</button>
+<button class="num" onclick="add('6')">6</button>
+<button class="op" onclick="add('-')">−</button>
 
-<button class="number" onclick="append('9')">9</button>
+<button class="num" onclick="add('1')">1</button>
+<button class="num" onclick="add('2')">2</button>
+<button class="num" onclick="add('3')">3</button>
+<button class="op" onclick="add('+')">+</button>
 
-<button class="operator" onclick="append('*')">×</button>
+<button class="op" onclick="add('(')">(</button>
+<button class="num" onclick="add('0')">0</button>
+<button class="num" onclick="add('.')">.</button>
+<button class="op" onclick="add(')')">)</button>
 
-<button class="number" onclick="append('4')">4</button>
+<button class="equal" style="grid-column:span 4;"
+onclick="calc()">
 
-<button class="number" onclick="append('5')">5</button>
+= 계산하기
 
-<button class="number" onclick="append('6')">6</button>
-
-<button class="operator" onclick="append('-')">−</button>
-
-<button class="number" onclick="append('1')">1</button>
-
-<button class="number" onclick="append('2')">2</button>
-
-<button class="number" onclick="append('3')">3</button>
-
-<button class="operator" onclick="append('+')">+</button>
-
-<button class="number" onclick="append('0')">0</button>
-
-<button class="number" onclick="append('.')">.</button>
-
-<button class="equal" onclick="calculate()">=</button>
-
-<button class="operator" onclick="append('(')">(</button>
-
-<button class="operator" onclick="append(')')">)</button>
+</button>
 
 </div>
 
@@ -273,31 +264,42 @@ kimhyunnkhan
 
 <script>
 
-let display=document.getElementById("display");
+const display=document.getElementById("display");
+const history=document.getElementById("history");
 
-function append(value){
+function add(v){
 
-display.value+=value;
-
-}
-
-function clearDisplay(){
-
-display.value="";
+display.value+=v;
 
 }
 
-function backspace(){
+function back(){
 
 display.value=display.value.slice(0,-1);
 
 }
 
-function calculate(){
+function clearAll(){
+
+display.value="";
+
+history.innerHTML="<b>계산과정</b><br>";
+
+}
+
+function calc(){
 
 try{
 
-display.value=eval(display.value);
+let exp=display.value;
+
+let result=eval(exp);
+
+history.innerHTML+=exp+" = <b>"+result+"</b><br>";
+
+history.scrollTop=history.scrollHeight;
+
+display.value=result;
 
 }
 
@@ -312,5 +314,4 @@ display.value="Error";
 </script>
 
 </body>
-
 </html>
